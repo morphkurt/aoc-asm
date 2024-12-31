@@ -1,0 +1,28 @@
+# Ignore build directories in all subfolders
+**/build/
+
+# Ignore CMake files
+**/CMakeCache.txt
+**/CMakeFiles/
+**/cmake_install.cmake
+**/Makefile
+
+# Ignore generated object and executable files
+**/*.o
+**/*.obj
+**/*.exe
+**/*.out
+**/*.so
+**/*.dylib
+**/*.dll
+**/*.a
+**/*.lib
+
+# Ignore logs and temporary files
+**/*.log
+**/*.tmp
+**/*.swp
+**/*.swo
+
+# Ignore macOS-specific files
+**/.DS_Store
