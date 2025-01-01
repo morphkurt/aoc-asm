@@ -9,7 +9,7 @@
             "type": "lldb",
             "request": "launch",
             "name": "Debug",
-            "program": "${workspaceFolder}/build/solve1",
+            "program": "${fileDirname}/build/${fileBasenameNoExtension}",
             "args": [],
             "cwd": "${workspaceFolder}"
         }
