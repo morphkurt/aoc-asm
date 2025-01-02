@@ -5,10 +5,10 @@ use clap::Arg;
 use clap::Command;
 use std::collections::HashMap;
 use std::fs;
-use std::time::Duration;
+use std::time::Instant;
 
 fn main() {
-    let mut functions: HashMap<&str, fn(input: &str) -> (i64, Duration)> = HashMap::new();
+    let mut functions: HashMap<&str, fn(input: &str) -> i64> = HashMap::new();
     functions.insert("y2015_day1_solve1", y2015day1::part1);
     functions.insert("y2015_day1_solve2", y2015day1::part2);
     functions.insert("y2015_day2_solve1", y2015day2::part1);
@@ -62,15 +62,17 @@ fn main() {
     let fn_name = format!("y{}_day{}_solve{}", y_str, d_str, part_str);
     let input = fs::read_to_string(format!("inputs/{}/day{}/input", y_str, d_str))
         .expect(&format!("inputs/{}/day{}/input not found", y_str, d_str));
-
     let f = functions.get(fn_name.as_str()).unwrap();
-    let (result, duration) = f(input.as_str());
+    let now = Instant::now();
+    let result = f(input.as_str());
+    let elapsed = now.elapsed();
+
 
     let output = match benchmark {
         true => {
             format!(
                 "answer for day {} part:{}: {}, running time: {:.2?}",
-                d_str, part_str, result, duration
+                d_str, part_str, result, elapsed
             )
         }
         false => {
