@@ -1,4 +1,5 @@
 mod y2014day1;
+mod y2014day2;
 
 use clap::Arg;
 use clap::Command;
@@ -9,6 +10,8 @@ fn main() {
     let mut functions: HashMap<&str, fn(input: &str) -> i64> = HashMap::new();
     functions.insert("y2014_day1_solve1", y2014day1::part1);
     functions.insert("y2014_day1_solve2", y2014day1::part2);
+    functions.insert("y2014_day2_solve1", y2014day2::part1);
+    functions.insert("y2014_day2_solve2", y2014day2::part2);
 
     let matches = Command::new("AOC in ASM")
         .version("0.1.0")
@@ -16,7 +19,7 @@ fn main() {
         .arg(
             Arg::new("day")
                 .short('d')
-                .default_value("1")
+                .default_value("2")
                 .long("day")
                 .help("aoc day"),
         )

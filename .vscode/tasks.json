@@ -2,27 +2,14 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "asm64",
+            "label": "clean and rebuild",
             "type": "shell",
-            "command": "sh",
-            "args": [
-                "-c",
-                "rawfilename=${fileDirname}/${fileBasenameNoExtension}; mkdir -p ${fileDirname}/build && nasm -F dwarf -g -f macho64 -i ${fileDirname} -o ${fileDirname}/build/${fileBasenameNoExtension}.o ${file} && ld -macos_version_min 11.0 -L /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib -lSystem -e _start -o ${fileDirname}/build/${fileBasenameNoExtension} ${fileDirname}/build/${fileBasenameNoExtension}.o"
-            ],  "problemMatcher": {
-                "pattern": {
-                    "regexp": "error"
-                }
-            },
-            "presentation": {
-                "focus": true,
-                "panel": "dedicated",
-                "reveal": "silent",
-                "clear": true
-            },
+            "command": "cargo clean && cargo build --target x86_64-apple-darwin",
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
+            },
+            "problemMatcher": []
         }
     ]
 }

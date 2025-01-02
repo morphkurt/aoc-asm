@@ -1,14 +1,13 @@
 {
     "version": "0.2.0",
     "configurations": [
-
         {
             "type": "lldb-dap",
             "request": "launch",
             "name": "Debug",
             "program": "${workspaceFolder}/target/x86_64-apple-darwin/debug/aoc-asm",
-            "args": ["-d","2", "-p","1"],
-            "cwd": "${workspaceFolder}"
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "clean and rebuild"
         }
     ]
 }
