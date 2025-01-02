@@ -12,6 +12,7 @@ fn main() {
     functions.insert("y2015_day1_solve1", y2015day1::part1);
     functions.insert("y2015_day1_solve2", y2015day1::part2);
     functions.insert("y2015_day2_solve1", y2015day2::part1);
+    functions.insert("y2015_day2_solve1_rust", y2015day2::part1_in_rust);
     functions.insert("y2015_day2_solve2", y2015day2::part2);
 
     let matches = Command::new("AOC in ASM")
@@ -39,18 +40,18 @@ fn main() {
                 .help("part"),
         )
         .arg(
-            Arg::new("test")
-                .short('t')
+            Arg::new("rust")
+                .short('r')
                 .required(false)
                 .num_args(0)
-                .help("test"),
+                .help("run with rust"),
         )
         .arg(
             Arg::new("benchmark")
                 .short('b')
                 .required(false)
                 .num_args(0)
-                .help("test"),
+                .help("do benchmarking"),
         )
         .get_matches();
 
@@ -58,11 +59,18 @@ fn main() {
     let d_str: &String = matches.get_one("day").unwrap();
     let part_str: &String = matches.get_one("part").unwrap();
     let benchmark: &bool = matches.get_one("benchmark").unwrap();
+    let with_rust: &bool = matches.get_one("rust").unwrap();
 
-    let fn_name = format!("y{}_day{}_solve{}", y_str, d_str, part_str);
+
+    let mut fn_name = format!("y{}_day{}_solve{}", y_str, d_str, part_str);
+
+    if *with_rust {
+        fn_name+="_rust";
+    }
+
     let input = fs::read_to_string(format!("inputs/{}/day{}/input", y_str, d_str))
         .expect(&format!("inputs/{}/day{}/input not found", y_str, d_str));
-    let f = functions.get(fn_name.as_str()).unwrap();
+    let f = functions.get(fn_name.as_str()).expect("function not implemented");
     let now = Instant::now();
     let result = f(input.as_str());
     let elapsed = now.elapsed();
