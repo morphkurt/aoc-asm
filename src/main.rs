@@ -67,18 +67,16 @@ fn main() {
     let (result, duration) = f(input.as_str());
 
     let output = match benchmark {
-        true => {format!(
-            "answer for day {} part:{}: {}, running time: {:.2?}",
-            d_str,
-            part_str,
-            result,
-            duration)}
-        false => {format!(
-            "answer for day {} part:{}: {}",
-            d_str,
-            part_str,
-            result)}
+        true => {
+            format!(
+                "answer for day {} part:{}: {}, running time: {:.2?}",
+                d_str, part_str, result, duration
+            )
+        }
+        false => {
+            format!("answer for day {} part:{}: {}", d_str, part_str, result)
+        }
     };
 
-   println!("{}",output);
+    println!("{}", output);
 }

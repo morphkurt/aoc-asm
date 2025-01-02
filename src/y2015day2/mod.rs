@@ -14,7 +14,7 @@ pub fn part1(input: &str) -> (i64, Duration) {
         let now = Instant::now();
         let r = y2015_day2_solve1(input_ptr, len);
         let elapsed = now.elapsed();
-        return (r,elapsed);
+        return (r, elapsed);
     };
 }
 
@@ -26,7 +26,7 @@ pub fn part2(input: &str) -> (i64, Duration) {
         let now = Instant::now();
         let r = y2015_day2_solve2(input_ptr, len);
         let elapsed = now.elapsed();
-        return (r,elapsed);
+        return (r, elapsed);
     };
 }
 
@@ -37,13 +37,13 @@ mod tests {
 
     #[test]
     fn test_part1() {
-        let (result,_) = part1(EXAMPLE);
+        let (result, _) = part1(EXAMPLE);
         assert_eq!(result, -2);
     }
 
     #[test]
     fn test_part2() {
-        let (result,_) = part2(EXAMPLE);
+        let (result, _) = part2(EXAMPLE);
         assert_eq!(result, 2);
     }
 }
