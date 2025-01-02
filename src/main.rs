@@ -5,9 +5,10 @@ use clap::Arg;
 use clap::Command;
 use std::collections::HashMap;
 use std::fs;
+use std::time::Duration;
 
 fn main() {
-    let mut functions: HashMap<&str, fn(input: &str) -> i64> = HashMap::new();
+    let mut functions: HashMap<&str, fn(input: &str) -> (i64, Duration)> = HashMap::new();
     functions.insert("y2015_day1_solve1", y2015day1::part1);
     functions.insert("y2015_day1_solve2", y2015day1::part2);
     functions.insert("y2015_day2_solve1", y2015day2::part1);
@@ -44,15 +45,40 @@ fn main() {
                 .num_args(0)
                 .help("test"),
         )
+        .arg(
+            Arg::new("benchmark")
+                .short('b')
+                .required(false)
+                .num_args(0)
+                .help("test"),
+        )
         .get_matches();
 
     let y_str: &String = matches.get_one("year").unwrap();
     let d_str: &String = matches.get_one("day").unwrap();
     let part_str: &String = matches.get_one("part").unwrap();
+    let benchmark: &bool = matches.get_one("benchmark").unwrap();
 
     let fn_name = format!("y{}_day{}_solve{}", y_str, d_str, part_str);
-    let input = fs::read_to_string(format!("inputs/{}/day{}/input", y_str, d_str)).expect(&format!("inputs/{}/day{}/input not found", y_str, d_str));
+    let input = fs::read_to_string(format!("inputs/{}/day{}/input", y_str, d_str))
+        .expect(&format!("inputs/{}/day{}/input not found", y_str, d_str));
 
     let f = functions.get(fn_name.as_str()).unwrap();
-    println!("answer for day {} part:{}: {}", d_str, part_str, f(input.as_str()));
+    let (result, duration) = f(input.as_str());
+
+    let output = match benchmark {
+        true => {format!(
+            "answer for day {} part:{}: {}, running time: {:.2?}",
+            d_str,
+            part_str,
+            result,
+            duration)}
+        false => {format!(
+            "answer for day {} part:{}: {}",
+            d_str,
+            part_str,
+            result)}
+    };
+
+   println!("{}",output);
 }

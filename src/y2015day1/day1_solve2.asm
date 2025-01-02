@@ -28,16 +28,19 @@ inc_value:
     inc r8                  ; Increment floor
     jmp check_basement
 
+
 dec_value:
     dec r8                  ; Decrement floor
 
 check_basement:
     cmp r8, -1              ; Check if basement is reached
     cmove r9, rcx           ; Store the remaining steps if basement is hit
-    jz loop_end             ; Exit if basement is hit
+    je loop_end             ; Exit if basement is hit
 
     jmp loop_start          ; Continue the loop
 
 loop_end:
-    mov rax, r9             ; Return the answer
+    xor rax, rax
+    mov rax, rsi
+    sub rax, r9
     ret
