@@ -26,3 +26,8 @@
 
 # Ignore macOS-specific files
 **/.DS_Store
+
+
+# Added by cargo
+
+/target

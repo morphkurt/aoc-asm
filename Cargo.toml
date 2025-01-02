@@ -1,0 +1,16 @@
+[package]
+name = "aoc-asm"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clap = "4.5.23"
+
+
+[build-dependencies]
+walkdir = "2.5.0"
+nasm-rs = "0.3.0"
+cc = "1.0.3"
+
+[features]
+test_lib = []

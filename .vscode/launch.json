@@ -1,17 +1,15 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
+
         {
-            "type": "lldb",
+            "type": "lldb-dap",
             "request": "launch",
             "name": "Debug",
-            "program": "${fileDirname}/build/${fileBasenameNoExtension}",
-            "args": [],
+            "program": "${workspaceFolder}/target/x86_64-apple-darwin/debug/aoc-asm",
+            "args": ["-d","2", "-p","1"],
             "cwd": "${workspaceFolder}"
         }
     ]
 }
+
