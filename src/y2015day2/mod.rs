@@ -1,7 +1,7 @@
 #[link(name = "aoc.a")]
 extern "C" {
-    fn y2014_day2_solve1(s: *const u8, len: usize) -> i64;
-    fn y2014_day2_solve2(s: *const u8, len: usize) -> i64;
+    fn y2015_day2_solve1(s: *const u8, len: usize) -> i64;
+    fn y2015_day2_solve2(s: *const u8, len: usize) -> i64;
 }
 
 pub fn part1(input: &str) -> i64 {
@@ -9,7 +9,7 @@ pub fn part1(input: &str) -> i64 {
     // Get the length of the string
     let len = input.len();
     unsafe {
-        let r = y2014_day2_solve1(input_ptr, len);
+        let r = y2015_day2_solve1(input_ptr, len);
         return r;
     };
 }
@@ -19,7 +19,7 @@ pub fn part2(input: &str) -> i64 {
     // Get the length of the string
     let len = input.len();
     unsafe {
-        let r = y2014_day2_solve2(input_ptr, len);
+        let r = y2015_day2_solve2(input_ptr, len);
         return r;
     };
 }

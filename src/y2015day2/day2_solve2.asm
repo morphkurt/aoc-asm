@@ -1,11 +1,12 @@
-global _y2014_day2_solve1
+global _y2015_day2_solve2
 
 section .text
 
-_y2014_day2_solve1:
+_y2015_day2_solve2:
     mov r10, rdi            ; Load the address of the string
     mov rcx, rsi            ; Load the string length into RCX (loop counter)
     xor r8, r8              ; Initialize floor information to 0
+    xor r9, r9              ; Initialize index to 0
 
 loop_start:
     test rcx, rcx           ; Check if the loop counter is zero
@@ -21,16 +22,22 @@ loop_start:
     cmp al, 0x29            ; Check for ')'
     je dec_value
 
-    jmp loop_start          ; Repeat the loop
+    jmp loop_start          ; Continue the loop
 
 inc_value:
     inc r8                  ; Increment floor
-    jmp loop_start          ; Return to loop logic
+    jmp check_basement
 
 dec_value:
     dec r8                  ; Decrement floor
-    jmp loop_start          ; Return to loop logic
+
+check_basement:
+    cmp r8, -1              ; Check if basement is reached
+    cmove r9, rcx           ; Store the remaining steps if basement is hit
+    jz loop_end             ; Exit if basement is hit
+
+    jmp loop_start          ; Continue the loop
 
 loop_end:
-    mov rax, r8             ; Return the final floor
+    mov rax, r9             ; Return the answer
     ret
